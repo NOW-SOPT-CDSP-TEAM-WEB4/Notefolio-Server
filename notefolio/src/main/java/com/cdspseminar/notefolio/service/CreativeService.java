@@ -20,6 +20,11 @@ public class CreativeService {
         return CreativesGetResponse.of(creatives);
     }
 
+    public CreativesGetResponse searchCreatives(String word) {
+        List<Creative> creatives = creativeRepository.findByCreatorNameContaining(word);
+        return CreativesGetResponse.of(creatives);
+    }
+
     @Transactional
     public void createCreative(){
         Creative creative = Creative.builder().view(3L).numLike(4L).build();
