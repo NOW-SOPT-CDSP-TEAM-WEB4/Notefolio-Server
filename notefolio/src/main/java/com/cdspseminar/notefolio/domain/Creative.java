@@ -16,5 +16,7 @@ public class Creative {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
+    private Long view;
+
+    private Long numLike;
 }
