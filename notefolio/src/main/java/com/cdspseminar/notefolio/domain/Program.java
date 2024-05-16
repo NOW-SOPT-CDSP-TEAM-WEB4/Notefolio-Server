@@ -23,11 +23,4 @@ public class Program extends BaseTimeEntity {
     private String date;
 
     private boolean online;
-
-    private Program(String title, String content, String date, boolean online){
-        this.title = title;
-        this.content = content;
-        this.date = date;
-        this.online = online;
-    }
 }
