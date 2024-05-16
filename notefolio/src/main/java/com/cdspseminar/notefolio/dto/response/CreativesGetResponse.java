@@ -13,6 +13,7 @@ public record CreativesGetResponse(
     public static CreativesGetResponse of(List<Creative> creatives) {
         return CreativesGetResponse.builder().creatives(creatives.stream()
                .map(creative -> CreativeGetResponse.builder()
+                       .name(creative.getCreator().getName())
                        .creativeId(creative.getId())
                        .view(creative.getView())
                        .like(creative.getNumLike())
