@@ -1,6 +1,5 @@
 package com.cdspseminar.notefolio.domain;
 
-import com.cdspseminar.notefolio.domain.common.BaseTimeEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -15,8 +14,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @Getter
 @Entity
-
-public class Program extends BaseTimeEntity {
+public class Workshop {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
