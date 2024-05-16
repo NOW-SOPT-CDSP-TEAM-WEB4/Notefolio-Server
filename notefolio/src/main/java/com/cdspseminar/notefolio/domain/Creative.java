@@ -1,10 +1,7 @@
 package com.cdspseminar.notefolio.domain;
 
 import com.cdspseminar.notefolio.domain.common.BaseTimeEntity;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
 @NoArgsConstructor
@@ -20,4 +17,8 @@ public class Creative extends BaseTimeEntity {
     private Long view;
 
     private Long numLike;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "creator_id")
+    private Creator creator;
 }
