@@ -21,5 +21,5 @@ public class Creator {
 
     private Long view;
 
-    private Long like;
+    private Long numLike;
 }
