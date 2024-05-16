@@ -1,5 +1,7 @@
 package com.cdspseminar.notefolio.service;
 
+import com.cdspseminar.notefolio.common.exception.BusinessException;
+import com.cdspseminar.notefolio.common.exception.ErrorStatus;
 import com.cdspseminar.notefolio.domain.Program;
 import com.cdspseminar.notefolio.dto.response.ProgramsFindResponse;
 import com.cdspseminar.notefolio.repository.ProgramRepository;
@@ -15,6 +17,9 @@ public class ProgramService {
 
     public ProgramsFindResponse getPrograms(){
         List<Program> programs = findPrograms();
+        if(programs.isEmpty()){
+            throw new BusinessException(ErrorStatus.PROGRAMS_NOT_FOUND);
+        }
         return ProgramsFindResponse.of(programs);
     }
     public List<Program> findPrograms(){
