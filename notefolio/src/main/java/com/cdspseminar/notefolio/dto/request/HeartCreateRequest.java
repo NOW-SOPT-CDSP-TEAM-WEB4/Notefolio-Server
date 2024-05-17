@@ -1,4 +1,8 @@
 package com.cdspseminar.notefolio.dto.request;
 
-public record HeartCreateRequest() {
+import lombok.AccessLevel;
+import lombok.Builder;
+
+@Builder(access = AccessLevel.PROTECTED)
+public record HeartCreateRequest(Long creativeId) {
 }
