@@ -19,7 +19,5 @@ public class Creator {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long view;
-
-    private Long numLike;
+    private String name;
 }
