@@ -7,6 +7,7 @@ import com.cdspseminar.notefolio.domain.Creator;
 import com.cdspseminar.notefolio.domain.Heart;
 import com.cdspseminar.notefolio.dto.request.HeartCreateRequest;
 import com.cdspseminar.notefolio.repository.CreativeRepository;
+import com.cdspseminar.notefolio.repository.CreatorRepository;
 import com.cdspseminar.notefolio.repository.HeartRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,9 +18,13 @@ import org.springframework.transaction.annotation.Transactional;
 public class HeartService {
     private final HeartRepository heartRepository;
     private final CreativeRepository creativeRepository;
+    private final CreatorRepository creatorRepository;
     @Transactional
     public void createHeart(Long creatorId, HeartCreateRequest heartCreateRequest){
-        Creator creator = new Creator(creatorId, "김솝트");
+        Creator creator = creatorRepository.findById(creatorId)
+                .orElseThrow(
+                        () -> new BusinessException(ErrorStatus.CREATOR_NOT_FOUND)
+                );
         Creative creative = creativeRepository.findById(heartCreateRequest.creativeId())
                 .orElseThrow(
                         () -> new BusinessException(ErrorStatus.CREATIVE_NOT_FOUND)
@@ -30,5 +35,24 @@ public class HeartService {
                 .build();
         heartRepository.save(heart);
         creative.increaseNumLike();
+    }
+
+    @Transactional
+    public void deleteHeart(Long creatorId, Long creativeId){
+        Creator creator = creatorRepository.findById(creatorId)
+                .orElseThrow(
+                        () -> new BusinessException(ErrorStatus.CREATOR_NOT_FOUND)
+                );
+        Creative creative = creativeRepository.findById(creativeId)
+                .orElseThrow(
+                        () -> new BusinessException(ErrorStatus.CREATIVE_NOT_FOUND)
+                );
+
+        Heart heart = heartRepository.findByCreatorAndCreative(creator, creative);
+        if (heart == null){
+            throw new BusinessException(ErrorStatus.HEART_NOT_FOUND);
+        }
+        heartRepository.delete(heart);
+        creative.decreaseNumLike();
     }
 }
