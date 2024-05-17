@@ -15,7 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/heart")
+@RequestMapping("/creatives/heart")
 @RequiredArgsConstructor
 public class HeartController {
     private final HeartService heartService;
@@ -23,9 +23,9 @@ public class HeartController {
     @PostMapping
     public ResponseEntity<ApiResponse<?>> createHeart(
             @RequestHeader Long creatorId,
-            @RequestHeader Long creativeId,
             @RequestBody HeartCreateRequest heartCreateRequest
     ){
+        heartService.createHeart(creatorId, heartCreateRequest);
         return ApiResponse.success(SuccessStatus.CREATED);
     }
 }
