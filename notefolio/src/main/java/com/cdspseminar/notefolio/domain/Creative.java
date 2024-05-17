@@ -16,9 +16,16 @@ public class Creative extends BaseTimeEntity {
 
     private Long view;
 
-    private Long numLike;
+    private Long numLike = 0L;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "creator_id")
     private Creator creator;
+
+    public void increaseNumLike(){
+        this.numLike++;
+    }
+    public void decreaseNumLike(){
+        this.numLike--;
+    }
 }
