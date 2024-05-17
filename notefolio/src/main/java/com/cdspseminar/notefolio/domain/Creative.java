@@ -16,7 +16,7 @@ public class Creative extends BaseTimeEntity {
 
     private Long view;
 
-    private Long numLike = 0L;
+    private Long numLike;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "creator_id")
