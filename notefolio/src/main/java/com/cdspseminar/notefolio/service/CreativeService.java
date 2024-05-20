@@ -17,12 +17,14 @@ public class CreativeService {
 
     public CreativesGetResponse getCreatives() {
         List<Creative> creatives = creativeRepository.findAll();
-        return CreativesGetResponse.of(creatives);
+        List<Creative> limitedCreatives = creatives.size() > 5 ? creatives.subList(0, 5) : creatives;
+        return CreativesGetResponse.of(limitedCreatives);
     }
 
     public CreativesGetResponse searchCreatives(String word) {
         List<Creative> creatives = creativeRepository.findByCreatorNameContaining(word);
-        return CreativesGetResponse.of(creatives);
+        List<Creative> limitedCreatives = creatives.size() > 16 ? creatives.subList(0, 16) : creatives;
+        return CreativesGetResponse.of(limitedCreatives);
     }
 
     @Transactional

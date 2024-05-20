@@ -20,8 +20,10 @@ public class ProgramService {
         if(programs.isEmpty()){
             throw new BusinessException(ErrorStatus.PROGRAMS_NOT_FOUND);
         }
-        return ProgramsFindResponse.of(programs);
+        List<Program> limitedPrograms = programs.size() > 4 ? programs.subList(0, 4) : programs;
+        return ProgramsFindResponse.of(limitedPrograms);
     }
+
     public List<Program> findPrograms(){
         return programRepository.findAll();
     }
