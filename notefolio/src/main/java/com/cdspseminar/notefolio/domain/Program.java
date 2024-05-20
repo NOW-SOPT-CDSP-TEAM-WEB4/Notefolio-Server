@@ -15,7 +15,6 @@ import lombok.NoArgsConstructor;
 @Builder
 @Getter
 @Entity
-
 public class Program extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
