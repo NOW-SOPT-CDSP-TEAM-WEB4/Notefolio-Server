@@ -17,6 +17,7 @@ public class WorkshopService {
 
     public WorkshopsGetResponse getWorkshops() {
         List<Workshop> workshops = workshopRepository.findAll();
-        return WorkshopsGetResponse.of(workshops);
+        List<Workshop> limitedWorkshops = workshops.size() > 3? workshops.subList(0, 3) : workshops;
+        return WorkshopsGetResponse.of(limitedWorkshops);
     }
 }
