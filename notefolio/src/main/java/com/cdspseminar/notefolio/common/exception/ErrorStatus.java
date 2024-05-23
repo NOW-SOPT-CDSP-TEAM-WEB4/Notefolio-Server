@@ -16,7 +16,9 @@ public enum ErrorStatus {
     HEART_ALREADY_EXISTS(HttpStatus.CONFLICT, "이미 존재하는 하트입니다."),
     INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "서버 내부 오류입니다."),
     PROGRAMS_NOT_FOUND(HttpStatus.NOT_FOUND, "프로그램이 없습니다."),
-    CREATIVE_NOT_FOUND(HttpStatus.NOT_FOUND, "존재하지 않는 크리에이티브 입니다.")
+    CREATIVE_NOT_FOUND(HttpStatus.NOT_FOUND, "존재하지 않는 크리에이티브입니다."),
+    CREATOR_NOT_FOUND(HttpStatus.NOT_FOUND, "존재하지 않는 크리에이터입니다."),
+    HEART_NOT_FOUND(HttpStatus.NOT_FOUND, "좋아요하지 않은 크리에이티브입니다.") //추후 수정 예정...
     ;
 
     private final HttpStatus httpStatus;

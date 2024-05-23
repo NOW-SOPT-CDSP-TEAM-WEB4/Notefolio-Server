@@ -24,6 +24,7 @@ public class HeartService {
     @Transactional
     public void createHeart(HeartCreateRequest heartCreateRequest){
         Creator creator = creatorRepository.findById(STANDARD_CREATOR_ID)
+
                 .orElseThrow(
                         () -> new BusinessException(ErrorStatus.CREATOR_NOT_FOUND)
                 );
@@ -42,5 +43,24 @@ public class HeartService {
                 .build();
         heartRepository.save(heart);
         creative.increaseNumLike();
+    }
+
+    @Transactional
+    public void deleteHeart(Long creatorId, Long creativeId){
+        Creator creator = creatorRepository.findById(creatorId)
+                .orElseThrow(
+                        () -> new BusinessException(ErrorStatus.CREATOR_NOT_FOUND)
+                );
+        Creative creative = creativeRepository.findById(creativeId)
+                .orElseThrow(
+                        () -> new BusinessException(ErrorStatus.CREATIVE_NOT_FOUND)
+                );
+
+        Heart heart = heartRepository.findByCreatorAndCreative(creator, creative);
+        if (heart == null){
+            throw new BusinessException(ErrorStatus.HEART_NOT_FOUND);
+        }
+        heartRepository.delete(heart);
+        creative.decreaseNumLike();
     }
 }
