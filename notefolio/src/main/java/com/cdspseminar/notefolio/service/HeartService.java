@@ -7,6 +7,7 @@ import com.cdspseminar.notefolio.domain.Creator;
 import com.cdspseminar.notefolio.domain.Heart;
 import com.cdspseminar.notefolio.dto.request.HeartCreateRequest;
 import com.cdspseminar.notefolio.repository.CreativeRepository;
+import com.cdspseminar.notefolio.repository.CreatorRepository;
 import com.cdspseminar.notefolio.repository.HeartRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,13 +18,24 @@ import org.springframework.transaction.annotation.Transactional;
 public class HeartService {
     private final HeartRepository heartRepository;
     private final CreativeRepository creativeRepository;
+    private final CreatorRepository creatorRepository;
+    private static final Long STANDARD_CREATOR_ID = 1L;
+
     @Transactional
-    public void createHeart(Long creatorId, HeartCreateRequest heartCreateRequest){
-        Creator creator = new Creator(creatorId, "김솝트");
+    public void createHeart(HeartCreateRequest heartCreateRequest){
+        Creator creator = creatorRepository.findById(STANDARD_CREATOR_ID)
+                .orElseThrow(
+                        () -> new BusinessException(ErrorStatus.CREATOR_NOT_FOUND)
+                );
         Creative creative = creativeRepository.findById(heartCreateRequest.creativeId())
                 .orElseThrow(
                         () -> new BusinessException(ErrorStatus.CREATIVE_NOT_FOUND)
                 );
+        heartRepository.findByCreatorIdAndCreativeId(STANDARD_CREATOR_ID, heartCreateRequest.creativeId())
+                .ifPresent(heart -> {
+                    throw new BusinessException(ErrorStatus.HEART_ALREADY_EXISTS);
+                });
+
         Heart heart = Heart.builder()
                 .creator(creator)
                 .creative(creative)
