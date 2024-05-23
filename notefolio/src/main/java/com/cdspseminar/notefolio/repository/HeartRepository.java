@@ -5,6 +5,8 @@ import com.cdspseminar.notefolio.domain.Creator;
 import com.cdspseminar.notefolio.domain.Heart;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.Optional;
+
 public interface HeartRepository extends JpaRepository<Heart, Long> {
-    Heart findByCreatorAndCreative(Creator creator, Creative creative);
+    Optional<Heart> findByCreatorIdAndCreativeId(Long creatorId, Long creativeId);
 }

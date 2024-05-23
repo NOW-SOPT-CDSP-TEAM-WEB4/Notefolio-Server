@@ -19,9 +19,12 @@ public class HeartService {
     private final HeartRepository heartRepository;
     private final CreativeRepository creativeRepository;
     private final CreatorRepository creatorRepository;
+    private static final Long STANDARD_CREATOR_ID = 1L;
+
     @Transactional
-    public void createHeart(Long creatorId, HeartCreateRequest heartCreateRequest){
-        Creator creator = creatorRepository.findById(creatorId)
+    public void createHeart(HeartCreateRequest heartCreateRequest){
+        Creator creator = creatorRepository.findById(STANDARD_CREATOR_ID)
+
                 .orElseThrow(
                         () -> new BusinessException(ErrorStatus.CREATOR_NOT_FOUND)
                 );
@@ -29,6 +32,11 @@ public class HeartService {
                 .orElseThrow(
                         () -> new BusinessException(ErrorStatus.CREATIVE_NOT_FOUND)
                 );
+        heartRepository.findByCreatorIdAndCreativeId(STANDARD_CREATOR_ID, heartCreateRequest.creativeId())
+                .ifPresent(heart -> {
+                    throw new BusinessException(ErrorStatus.HEART_ALREADY_EXISTS);
+                });
+
         Heart heart = Heart.builder()
                 .creator(creator)
                 .creative(creative)

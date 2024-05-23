@@ -13,6 +13,7 @@ public enum ErrorStatus {
     ENTITY_NOT_FOUND(HttpStatus.NOT_FOUND, "대상을 찾을 수 없습니다."),
     METHOD_NOT_ALLOWED(HttpStatus.METHOD_NOT_ALLOWED, "잘못된 HTTP method 요청입니다."),
     CONFLICT(HttpStatus.CONFLICT, "이미 존재하는 리소스입니다."),
+    HEART_ALREADY_EXISTS(HttpStatus.CONFLICT, "이미 존재하는 하트입니다."),
     INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "서버 내부 오류입니다."),
     PROGRAMS_NOT_FOUND(HttpStatus.NOT_FOUND, "프로그램이 없습니다."),
     CREATIVE_NOT_FOUND(HttpStatus.NOT_FOUND, "존재하지 않는 크리에이티브입니다."),

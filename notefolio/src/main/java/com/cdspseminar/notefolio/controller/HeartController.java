@@ -16,10 +16,9 @@ public class HeartController {
 
     @PostMapping
     public ResponseEntity<ApiResponse<?>> createHeart(
-            @RequestHeader Long creatorId,
             @RequestBody HeartCreateRequest heartCreateRequest
     ){
-        heartService.createHeart(creatorId, heartCreateRequest);
+        heartService.createHeart(heartCreateRequest);
         return ApiResponse.success(SuccessStatus.CREATED);
     }
 
