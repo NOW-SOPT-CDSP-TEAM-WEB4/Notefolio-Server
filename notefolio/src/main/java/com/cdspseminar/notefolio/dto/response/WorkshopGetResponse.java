@@ -6,6 +6,7 @@ import lombok.Builder;
 
 @Builder(access = AccessLevel.PROTECTED)
 public record WorkshopGetResponse(
+        Long workshopId,
         String title,
         String content,
         String date,

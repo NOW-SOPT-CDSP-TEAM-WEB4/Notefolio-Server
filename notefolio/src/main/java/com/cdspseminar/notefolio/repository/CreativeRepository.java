@@ -8,6 +8,8 @@ import java.util.List;
 
 public interface CreativeRepository extends JpaRepository<Creative, Long> {
 
-    @Query("SELECT c FROM Creative c WHERE c.creator.name LIKE %?1%")
+    @Query("SELECT c FROM Creative c WHERE c.creator.name LIKE %?1% ORDER BY c.id ASC")
     List<Creative> findByCreatorNameContaining(String name);
+
+    List<Creative> findAllByOrderByIdAsc();
 }

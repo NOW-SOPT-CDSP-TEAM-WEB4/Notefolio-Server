@@ -13,6 +13,7 @@ public record WorkshopsGetResponse(
     public static WorkshopsGetResponse of(List<Workshop> workshops) {
         return WorkshopsGetResponse.builder().workshops(workshops.stream()
                 .map(workshop -> WorkshopGetResponse.builder()
+                        .workshopId(workshop.getId())
                         .title(workshop.getTitle())
                         .content(workshop.getContent())
                         .date(workshop.getDate())

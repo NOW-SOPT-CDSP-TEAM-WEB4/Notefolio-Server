@@ -8,7 +8,8 @@ public record CreativeGetResponse(
         String name,
         long creativeId,
         long view,
-        long like
+        long like,
+        boolean isLike
 ) {
 
 
