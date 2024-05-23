@@ -24,10 +24,9 @@ public class HeartController {
 
     @DeleteMapping("/{creativeId}")
     public ResponseEntity<ApiResponse<?>> deleteHeart(
-            @RequestHeader Long creatorId,
             @PathVariable Long creativeId
     ){
-        heartService.deleteHeart(creatorId, creativeId);
+        heartService.deleteHeart(creativeId);
         return ApiResponse.success(SuccessStatus.OK);
     }
 }

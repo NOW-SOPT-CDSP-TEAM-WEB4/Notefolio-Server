@@ -13,6 +13,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class HeartService {
@@ -46,21 +48,17 @@ public class HeartService {
     }
 
     @Transactional
-    public void deleteHeart(Long creatorId, Long creativeId){
-        Creator creator = creatorRepository.findById(creatorId)
-                .orElseThrow(
-                        () -> new BusinessException(ErrorStatus.CREATOR_NOT_FOUND)
-                );
+    public void deleteHeart(Long creativeId) {
         Creative creative = creativeRepository.findById(creativeId)
                 .orElseThrow(
                         () -> new BusinessException(ErrorStatus.CREATIVE_NOT_FOUND)
                 );
 
-        Heart heart = heartRepository.findByCreatorAndCreative(creator, creative);
-        if (heart == null){
+        Optional<Heart> heart = heartRepository.findByCreatorIdAndCreativeId(STANDARD_CREATOR_ID, creativeId);
+        if (heart.isEmpty()){
             throw new BusinessException(ErrorStatus.HEART_NOT_FOUND);
         }
-        heartRepository.delete(heart);
+        heartRepository.deleteById(heart.get().getId());
         creative.decreaseNumLike();
     }
 }
