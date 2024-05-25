@@ -29,4 +29,11 @@ public class ProfileController {
                 .findFirst()
                 .orElse(NULL);
     }
+
+    @GetMapping("/v3")
+    public String getProfileV3() {
+        return Arrays.stream(env.getActiveProfiles())
+                .findFirst()
+                .orElse(NULL);
+    }
 }
