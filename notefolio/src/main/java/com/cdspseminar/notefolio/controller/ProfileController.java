@@ -23,12 +23,17 @@ public class ProfileController {
                 .orElse(NULL);
     }
 
-    @GetMapping("/prac")
+    @GetMapping("/v2")
     public String getProfileV2() {
         return Arrays.stream(env.getActiveProfiles())
                 .findFirst()
                 .orElse(NULL);
     }
 
-
+    @GetMapping("/v3")
+    public String getProfileV3() {
+        return Arrays.stream(env.getActiveProfiles())
+                .findFirst()
+                .orElse(NULL);
+    }
 }
