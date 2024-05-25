@@ -63,7 +63,7 @@ jobs:
       run: cp ./scripts/*.sh ./deploy
       
     - name: Make zip file
-      run: zip -r ./now-sopt.zip ./deploy
+      run: zip -r ./now-sopt-seminar.zip ./deploy
       shell: bash
       
     - name: Configure AWS credentials
@@ -74,7 +74,7 @@ jobs:
         aws-region: ap-northeast-2
         
     - name: Upload to S3
-      run: aws s3 cp --region ap-northeast-2 ./now-sopt.zip s3://$S3_BUCKET_NAME/
+      run: aws s3 cp --region ap-northeast-2 ./now-sopt-seminar.zip s3://$S3_BUCKET_NAME/
       
     - name: Deploy
       env:
@@ -83,7 +83,7 @@ jobs:
       run:
         aws deploy create-deployment 
         --application-name now-sopt-deploy
-        --deployment-group-name now-sopt-deploy
+        --deployment-group-name now-sopt-seminar-deploy
         --file-exists-behavior OVERWRITE 
-        --s3-location bucket=$S3_BUCKET_NAME,bundleType=zip,key=now-sopt.zip
+        --s3-location bucket=$S3_BUCKET_NAME,bundleType=zip,key=now-sopt-seminar.zip
         --region ap-northeast-2
