@@ -37,6 +37,6 @@ jobs:
       
     - name: build
       run: |
-          chmod +x gradlew
+          chmod +x notefolio/gradlew
           ./notefolio/gradlew build -x test
       shell: bash
