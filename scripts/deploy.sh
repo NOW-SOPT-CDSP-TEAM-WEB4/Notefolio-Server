@@ -35,7 +35,7 @@ ln -Tfs $DEPLOY_PATH$JAR_NAME $GREEN_APPLICATION_PATH
 
 echo "----------------------------------------------------------------------"
 echo "> $GREEN_PROFILE 배포"
-nohup java -jar -Duser.timezone=Asia/Seoul -Dspring.profiles.active=$GREEN_PROFILE $GREEN_APPLICATION_PATH >> /home/ubuntu/app/nohup.out 2>&1 &
+nohup java -jar -Duser.timezone=Asia/Seoul -Dspring.profiles.active=$GREEN_PROFILE $GREEN_APPLICATION_PATH >> /home/ubuntu/notefolio/nohup.out 2>&1 &
 
 echo "----------------------------------------------------------------------"
 
