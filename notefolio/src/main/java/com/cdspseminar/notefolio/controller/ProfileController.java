@@ -23,4 +23,12 @@ public class ProfileController {
                 .orElse(NULL);
     }
 
+    @GetMapping("/prac")
+    public String getProfileV2() {
+        return Arrays.stream(env.getActiveProfiles())
+                .findFirst()
+                .orElse(NULL);
+    }
+
+
 }
