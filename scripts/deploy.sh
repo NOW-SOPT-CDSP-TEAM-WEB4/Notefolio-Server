@@ -4,7 +4,7 @@ JAR_NAME=$(basename $BUILD_PATH)
 echo "> build 파일명: $JAR_NAME"
 
 echo "> build 파일 복사"
-DEPLOY_PATH=/home/ubuntu/app/
+DEPLOY_PATH=/home/ubuntu/notefolio/
 cp $BUILD_PATH $DEPLOY_PATH
 
 echo "> 현재 구동중인 Port 확인"
